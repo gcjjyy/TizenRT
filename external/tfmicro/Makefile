@@ -31,11 +31,14 @@ CXXFLAGS += -Wno-shadow -Wno-pedantic
 CXXFLAGS += -pipe -std=c++11
 CXXFLAGS += -fno-exceptions -fcheck-new -fno-rtti
 CXXFLAGS += -ffunction-sections -fdata-sections
-
 CXXFLAGS += -DTF_LITE_DISABLE_X86_NEON
-
+CXXFLAGS += -DFLATBUFFERS_NAN_DEFAULTS
 CXXFLAGS += -I$(FLATBUFFER_INC) -I$(GEMMLOWP_INC) -I.
-CFLAGS   += -I$(FLATBUFFER_INC) -I$(GEMMLOWP_INC) -I.
+
+CFLAGS += -Wno-strict-prototypes
+CFLAGS += -DTF_LITE_DISABLE_X86_NEON
+CFLAGS += -DFLATBUFFERS_NAN_DEFAULTS
+CFLAGS += -I$(FLATBUFFER_INC) -I$(GEMMLOWP_INC) -I.
 
 CSRCS += tensorflow/lite/c/common.c
 CXXSRCS += tensorflow/lite/micro/kernels/concatenation.cc
@@ -90,7 +93,7 @@ CXXSRCS += tensorflow/lite/core/api/op_resolver.cc
 
 AOBJS		= $(ASRCS:.S=$(OBJEXT))
 COBJS		= $(CSRCS:.c=$(OBJEXT))
-CXXOBJS		= $(CXXSRCS:.cpp=$(OBJEXT))
+CXXOBJS		= $(CXXSRCS:.cc=$(OBJEXT))
 
 SRCS		= $(ASRCS) $(CSRCS) $(CXXSRCS)
 OBJS		= $(AOBJS) $(COBJS) $(CXXOBJS)
@@ -132,7 +135,7 @@ $(AOBJS): %$(OBJEXT): %.S
 $(COBJS): %$(OBJEXT): %.c
 	$(call COMPILE, $<, $@)
 
-$(CXXOBJS) $(MAINOBJ): %$(OBJEXT): %.cpp
+$(CXXOBJS) $(MAINOBJ): %$(OBJEXT): %.cc
 	$(call COMPILEXX, $<, $@)
 
 .built: chkcxx $(OBJS)
