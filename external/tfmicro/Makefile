@@ -27,18 +27,28 @@ CXXSRCS		=
 FLATBUFFER_INC = third_party/flatbuffers/include
 GEMMLOWP_INC   = third_party/gemmlowp
 
-CXXFLAGS += -Wno-shadow -Wno-pedantic
+CXXFLAGS += -Wno-shadow -Wno-pedantic -fno-permissive
 CXXFLAGS += -pipe -std=c++11
 CXXFLAGS += -fno-exceptions -fcheck-new -fno-rtti
 CXXFLAGS += -ffunction-sections -fdata-sections
 CXXFLAGS += -DTF_LITE_DISABLE_X86_NEON
-CXXFLAGS += -DFLATBUFFERS_NAN_DEFAULTS
+CXXFLAGS += -DTF_LITE_STATIC_MEMORY -DNDEBUG -g
 CXXFLAGS += -I$(FLATBUFFER_INC) -I$(GEMMLOWP_INC) -I.
+
+CXXFLAGS += -Wno-maybe-uninitialized
+CXXFLAGS += -Wno-missing-field-initializers
+CXXFLAGS += -Wno-pointer-sign
+CXXFLAGS += -Wno-type-limits
 
 CFLAGS += -Wno-strict-prototypes
 CFLAGS += -DTF_LITE_DISABLE_X86_NEON
-CFLAGS += -DFLATBUFFERS_NAN_DEFAULTS
+CFLAGS += -DTF_LITE_STATIC_MEMORY -DNDEBUG -g
 CFLAGS += -I$(FLATBUFFER_INC) -I$(GEMMLOWP_INC) -I.
+
+CFLAGS += -Wno-maybe-uninitialized
+CFLAGS += -Wno-missing-field-initializers
+CFLAGS += -Wno-pointer-sign
+CFLAGS += -Wno-type-limits
 
 CSRCS += tensorflow/lite/c/common.c
 CXXSRCS += tensorflow/lite/micro/kernels/concatenation.cc
