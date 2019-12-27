@@ -33,16 +33,17 @@ CXXFLAGS += -fno-exceptions -fcheck-new -fno-rtti
 CXXFLAGS += -ffunction-sections -fdata-sections
 CXXFLAGS += -DTF_LITE_DISABLE_X86_NEON
 CXXFLAGS += -DTF_LITE_STATIC_MEMORY -DNDEBUG -g
+CXXFLAGS += -D_HAS_CXX17=0 -D__ANDROID_=0
 CXXFLAGS += -I$(FLATBUFFER_INC) -I$(GEMMLOWP_INC) -I.
 
 CXXFLAGS += -Wno-maybe-uninitialized
 CXXFLAGS += -Wno-missing-field-initializers
-CXXFLAGS += -Wno-pointer-sign
 CXXFLAGS += -Wno-type-limits
 
 CFLAGS += -Wno-strict-prototypes
 CFLAGS += -DTF_LITE_DISABLE_X86_NEON
 CFLAGS += -DTF_LITE_STATIC_MEMORY -DNDEBUG -g
+CFLAGS += -D_HAS_CXX17=0 -D__ANDROID_=0
 CFLAGS += -I$(FLATBUFFER_INC) -I$(GEMMLOWP_INC) -I.
 
 CFLAGS += -Wno-maybe-uninitialized

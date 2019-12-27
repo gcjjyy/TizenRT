@@ -21,6 +21,8 @@ limitations under the License.
 
 #include <cinttypes>
 
+#define PRId32 "ld"
+
 #include "tensorflow/lite/schema/schema_generated.h"
 namespace tflite {
 namespace {

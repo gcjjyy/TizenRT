@@ -318,7 +318,12 @@ template<typename T> class Vector {
   T *data() { return reinterpret_cast<T *>(Data()); }
 
   template<typename K> return_type LookupByKey(K key) const {
+    /*
     void *search_result = std::bsearch(
+        &key, Data(), size(), IndirectHelper<T>::element_stride, KeyCompare<K>);
+    */
+
+    void *search_result = bsearch(
         &key, Data(), size(), IndirectHelper<T>::element_stride, KeyCompare<K>);
 
     if (!search_result) {

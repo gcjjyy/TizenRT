@@ -26,6 +26,8 @@ limitations under the License.
 #include "tensorflow/lite/micro/memory_planner/greedy_memory_planner.h"
 #include "tensorflow/lite/micro/simple_memory_allocator.h"
 
+typedef long double max_align_t;
+
 namespace tflite {
 
 namespace {
@@ -52,7 +54,7 @@ using std::max_align_t;
 #endif
 #else
 // We assume other compiler/clib configurations don't have this issue.
-using std::max_align_t;
+//using std::max_align_t;
 #endif
 
 class MicroBuiltinDataAllocator : public BuiltinDataAllocator {

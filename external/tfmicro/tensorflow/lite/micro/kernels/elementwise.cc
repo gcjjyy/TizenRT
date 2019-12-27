@@ -74,28 +74,32 @@ inline TfLiteStatus EvalLogical(TfLiteContext* context, TfLiteNode* node,
   return EvalImpl<bool>(context, node, bool_func, kTfLiteBool);
 }
 
+float ___abs(float value) {
+  return abs(value);
+}
+
 TfLiteStatus AbsEval(TfLiteContext* context, TfLiteNode* node) {
-  return EvalNumeric(context, node, std::abs);
+  return EvalNumeric(context, node, /*std::*/___abs);
 }
 
 TfLiteStatus SinEval(TfLiteContext* context, TfLiteNode* node) {
-  return EvalNumeric(context, node, std::sin);
+  return EvalNumeric(context, node, /*std::*/sinf);
 }
 
 TfLiteStatus CosEval(TfLiteContext* context, TfLiteNode* node) {
-  return EvalNumeric(context, node, std::cos);
+  return EvalNumeric(context, node, /*std::*/cosf);
 }
 
 TfLiteStatus LogEval(TfLiteContext* context, TfLiteNode* node) {
-  return EvalNumeric(context, node, std::log);
+  return EvalNumeric(context, node, /*std::*/logf);
 }
 
 TfLiteStatus SqrtEval(TfLiteContext* context, TfLiteNode* node) {
-  return EvalNumeric(context, node, std::sqrt);
+  return EvalNumeric(context, node, /*std::*/sqrtf);
 }
 
 TfLiteStatus RsqrtEval(TfLiteContext* context, TfLiteNode* node) {
-  return EvalNumeric(context, node, [](float f) { return 1.f / std::sqrt(f); });
+  return EvalNumeric(context, node, [](float f) { return 1.f / /*std::*/sqrtf(f); });
 }
 
 TfLiteStatus SquareEval(TfLiteContext* context, TfLiteNode* node) {
