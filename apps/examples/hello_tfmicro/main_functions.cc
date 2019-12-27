@@ -13,11 +13,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-#include "tensorflow/lite/micro/examples/hello_world/main_functions.h"
+#include "main_functions.h"
 
-#include "tensorflow/lite/micro/examples/hello_world/constants.h"
-#include "tensorflow/lite/micro/examples/hello_world/output_handler.h"
-#include "tensorflow/lite/micro/examples/hello_world/sine_model_data.h"
+#include "constants.h"
+#include "output_handler.h"
+#include "sine_model_data.h"
 #include "tensorflow/lite/micro/kernels/all_ops_resolver.h"
 #include "tensorflow/lite/micro/micro_error_reporter.h"
 #include "tensorflow/lite/micro/micro_interpreter.h"
@@ -114,19 +114,4 @@ void loop() {
   // the total number per cycle
   inference_count += 1;
   if (inference_count >= kInferencesPerCycle) inference_count = 0;
-}
-
-
-void HandleOutput(tflite::ErrorReporter* error_reporter, float x_value,
-                  float y_value) {
-  // Log the current X and Y values
-  error_reporter->Report("x_value: %f, y_value: %f\n", x_value, y_value);
-}
-
-
-int main(int argc, char* argv[]) {
-  setup();
-  while (true) {
-    loop();
-  }
 }
